@@ -1,0 +1,24 @@
+# Configuration for Supply Chain Demand Forecasting Engine
+
+database:
+  path: "data/forecast_db.sqlite"
+  
+model:
+  name: "prophet_forecast_model"
+  forecast_periods: 90  # days
+  seasonality_mode: "multiplicative"
+  yearly_seasonality: true
+  weekly_seasonality: true
+  daily_seasonality: false
+  
+etl:
+  data_path: "data/raw"
+  processed_path: "data/processed"
+  
+api:
+  host: "0.0.0.0"
+  port: 8000
+  
+dashboard:
+  port: 8501
+
