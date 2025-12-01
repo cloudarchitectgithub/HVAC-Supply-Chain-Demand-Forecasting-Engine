@@ -21,38 +21,38 @@ An end to end machine learning solution for predicting demand, optimizing invent
 
 ```mermaid
 graph TB
-    subgraph "Data Sources"
+    subgraph DS["Data Sources"]
         ERP[ERP System<br/>Infor/SAP]
         MES[MES System]
         SCE[SCE System]
         CSV[CSV Files]
     end
     
-    subgraph "ETL Pipeline"
+    subgraph EP["ETL Pipeline"]
         Extract[Extract<br/>Data Collection]
         Transform[Transform<br/>Feature Engineering]
         Load[Load<br/>Database Storage]
     end
     
-    subgraph "Data Storage"
+    subgraph DST["Data Storage"]
         DB[(SQLite Database<br/>Historical Data<br/>Forecasts<br/>Metrics)]
     end
     
-    subgraph "ML Models"
+    subgraph ML["ML Models"]
         Prophet[Prophet<br/>Time Series Model]
         Baseline[Baseline<br/>Comparison]
         Eval[Model<br/>Evaluation]
     end
     
-    subgraph "API Layer"
+    subgraph AL["API Layer"]
         API[FastAPI Service<br/>REST Endpoints]
-        ForecastEP[/forecast]
-        RetrainEP[/retrain]
-        MetricsEP[/metrics]
-        ERPEP[/erp/integration]
+        ForecastEP[POST /forecast]
+        RetrainEP[POST /retrain]
+        MetricsEP[GET /metrics]
+        ERPEP[POST /erp/integration]
     end
     
-    subgraph "Presentation"
+    subgraph PR["Presentation"]
         Dashboard[Streamlit Dashboard<br/>Visualizations<br/>What-If Analysis<br/>ROI Calculations]
     end
     
@@ -83,14 +83,21 @@ graph TB
     ERPEP --> Dashboard
     DB --> Dashboard
     
-    style ERP fill:#e1f5ff
-    style MES fill:#e1f5ff
-    style SCE fill:#e1f5ff
-    style CSV fill:#e1f5ff
-    style DB fill:#fff4e1
-    style Prophet fill:#e8f5e9
-    style API fill:#f3e5f5
-    style Dashboard fill:#fce4ec
+    style ERP fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style MES fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style SCE fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style CSV fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style DB fill:#fff4e1,stroke:#333,stroke-width:2px,color:#000
+    style Prophet fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style API fill:#f3e5f5,stroke:#333,stroke-width:2px,color:#000
+    style Dashboard fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    
+    style DS fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
+    style EP fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
+    style DST fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
+    style ML fill:#e8f5e9,stroke:#333,stroke-width:3px,color:#000
+    style AL fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
+    style PR fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
 ```
 
 ### Data Flow Diagram
@@ -131,7 +138,7 @@ sequenceDiagram
 
 ```mermaid
 graph LR
-    subgraph "Application Layer"
+    subgraph AL["Application Layer"]
         A1[Data Generator]
         A2[ETL Pipeline]
         A3[Forecast Model]
@@ -139,12 +146,12 @@ graph LR
         A5[Dashboard]
     end
     
-    subgraph "Data Layer"
+    subgraph DL["Data Layer"]
         D1[(SQLite DB)]
         D2[Model Files]
     end
     
-    subgraph "External Integration"
+    subgraph EI["External Integration"]
         E1[ERP API]
         E2[CSV Import]
     end
@@ -161,13 +168,19 @@ graph LR
     E1 -->|Mock| A4
     A4 -->|Response| E1
     
-    style A1 fill:#bbdefb
-    style A2 fill:#c8e6c9
-    style A3 fill:#fff9c4
-    style A4 fill:#f8bbd0
-    style A5 fill:#e1bee7
-    style D1 fill:#ffe0b2
-    style D2 fill:#ffe0b2
+    style A1 fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style A2 fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style A3 fill:#e8f5e9,stroke:#333,stroke-width:2px,color:#000
+    style A4 fill:#f3e5f5,stroke:#333,stroke-width:2px,color:#000
+    style A5 fill:#fce4ec,stroke:#333,stroke-width:2px,color:#000
+    style D1 fill:#fff4e1,stroke:#333,stroke-width:2px,color:#000
+    style D2 fill:#fff4e1,stroke:#333,stroke-width:2px,color:#000
+    style E1 fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    style E2 fill:#e1f5ff,stroke:#333,stroke-width:2px,color:#000
+    
+    style AL fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
+    style DL fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
+    style EI fill:#ffffff,stroke:#333,stroke-width:3px,color:#000
 ```
 
 ---
@@ -207,7 +220,7 @@ The solution addresses critical supply chain challenges:
 ### Primary Objectives
 
 1. **Accurate Demand Forecasting**
-   - Predict demand 30-90 days in advance
+   - Predict demand 30 to 90 days in advance
    - Achieve MAPE (Mean Absolute Percentage Error) < 15%
    - Provide confidence intervals for risk assessment
 
@@ -503,8 +516,8 @@ Planned alerting capabilities:
 The ETL pipeline creates 15+ engineered features:
 
 - **Temporal Features**: Year, month, day of year, week, day of week, quarter
-- **Lag Features**: 1-day, 7-day, 30-day demand lags
-- **Rolling Statistics**: 7, 30, 90-day moving averages and standard deviations
+- **Lag Features**: 1 day, 7 day, 30 day demand lags
+- **Rolling Statistics**: 7, 30, 90 day moving averages and standard deviations
 - **Seasonal Indicators**: Summer/winter flags, weekend indicators
 - **Growth Metrics**: Week over week, month over month growth rates
 
@@ -700,4 +713,4 @@ For issues, questions, or contributions, please open an issue in the repository.
 
 ---
 
-**Built with ❤️ for supply chain optimization**
+
